@@ -1,7 +1,37 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import viteDevConfig from './vite.config.dev.js'
+import viteProdConfig from './vite.config.prod.js'
+import viteBaseConfig from './vite.config.base.js'
 
+const envResolve = {
+  serve: ()=> ({ ...viteBaseConfig, ...viteDevConfig }),
+  build: ()=> ({ ...viteBaseConfig, ...viteProdConfig })
+ }
+
+// defineConfig 类型提示
+
+// 不使用defineConfig
+/** @type import('vite').UserConfig */
+// export default { 
+// 将指定数组中的依赖不进行依赖预构建
+// }
+
+// 使用defineConfig
 // https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [react()],
+
+// 默认写法
+// export default defineConfig({
+//   plugins: [react()],
+// })
+
+// 配置文件需要基于（dev/serve 或 build）命令或者不同的 模式 来决定选项
+export default defineConfig(({ command, mode, ssrBuild }) => {
+  // command === 'serve' dev 独有配置
+  // command === 'build' build 独有配置
+  console.log('command', command);
+  
+  return envResolve[command]()
 })
+
+
