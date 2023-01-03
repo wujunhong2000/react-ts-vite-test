@@ -1,12 +1,12 @@
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
 import viteDevConfig from './vite.config.dev.js'
 import viteProdConfig from './vite.config.prod.js'
 import viteBaseConfig from './vite.config.base.js'
 
+type command = "build" | "serve"
 const envResolve = {
-  serve: ()=> ({ ...viteBaseConfig, ...viteDevConfig }),
-  build: ()=> ({ ...viteBaseConfig, ...viteProdConfig })
+  serve: (command: command)=> ({ ...viteBaseConfig(command), ...viteDevConfig }),
+  build: (command: command)=> ({ ...viteBaseConfig(command), ...viteProdConfig })
  }
 
 // defineConfig 类型提示
@@ -29,9 +29,7 @@ const envResolve = {
 export default defineConfig(({ command, mode, ssrBuild }) => {
   // command === 'serve' dev 独有配置
   // command === 'build' build 独有配置
-  console.log('command', command);
-  
-  return envResolve[command]()
+  return envResolve[command](command)
 })
 
 

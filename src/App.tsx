@@ -1,12 +1,20 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
-import './App.css'
+import AppLess from './App.module.less'
+import { forEach } from 'lodash'
 
 function App() {
   const [count, setCount] = useState(0)
-
+  // 获取环境变量
+  // console.log(import.meta.env);
+  console.log('AppLess', AppLess);
+  let arr: any[]  = []
+  forEach(arr, (params)=> {
+    console.log('params', params);
+  })
+  
   return (
-    <div className="App">
+    <div className={AppLess.app}>
       <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src="/vite.svg" className="logo" alt="Vite logo" />

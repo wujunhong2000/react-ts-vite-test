@@ -4,7 +4,7 @@
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": false,
-    "skipLibCheck": true,
+    "skipLibCheck": true, // 是否跳过node_modules的检查
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
