@@ -1,33 +1,43 @@
-// import path from "path";
+import { resolve } from "path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import { ViteAliases } from "vite-aliases";
 import { viteMockServe } from "vite-plugin-mock";
 // import checker from "vite-plugin-checker";
 import viteCompression from "vite-plugin-compression";
-import importToCDN from "vite-plugin-cdn-import";
+// import importToCDN from "vite-plugin-cdn-import";
+
+
+function pathResolve(dir) {
+  return resolve(__dirname, '.', dir);
+}
 
 export default defineConfig(({ command }) => {
   return {
-    server: { // 开发服务器配置
-      proxy: { // 配置跨域
-        '/api': {
-          target: 'https://www.360.com',
+    resolve: {
+      // ViteAliases插件可以替代 https://www.npmjs.com/package/vite-aliases
+      alias: [ // 设置别名
+      {
+        // /@/xxxx  =>  src/xxx
+        find: /@\//,
+        replacement: pathResolve('src') + '/',
+      },
+      ],
+    },
+    server: {
+      // 开发服务器配置
+      proxy: {
+        // 配置跨域
+        "/api": {
+          target: "https://www.360.com",
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, ''),
+          rewrite: (path) => path.replace(/^\/api/, ""),
         },
-      }
+      },
     },
     optimizeDeps: {
       exclude: [], // 将指定数组中的依赖不进行依赖预构建
     },
     // envPrefix: "ENV_", // 配置vite注入客户端环境变量校验的env前缀
-    // resolve: { // ViteAliases插件可以替代 https://www.npmjs.com/package/vite-aliases
-    //     alias: {// 设置别名
-    //         '@': path.resolve(__dirname, './src') ,
-    //         '@assets': path.resolve(__dirname, './src/assets') ,
-    //     }
-    // },
     // vite天生就支持对css文件的直接处理
     css: {
       // 对css的行为进行配置
@@ -87,7 +97,6 @@ export default defineConfig(({ command }) => {
     },
     plugins: [
       react(),
-      ViteAliases(),
       // require('postcss-preset-env'),
       viteMockServe({
         // default
@@ -103,7 +112,7 @@ export default defineConfig(({ command }) => {
       // }),
 
       // importToCDN({ // cdn
-      //   
+      //
       //   modules: [
       //     {
       //       name: "react",
@@ -117,6 +126,6 @@ export default defineConfig(({ command }) => {
       //     },
       //   ],
       // }),
-    ]
+    ],
   };
 });
