@@ -2,15 +2,16 @@ import { LocaleFormatter, useLocale } from "@/locales";
 import { FooterToolbar, PageContainer } from "@ant-design/pro-layout";
 import type { ProColumns, ActionType } from "@ant-design/pro-table";
 import ProTable from "@ant-design/pro-table";
-import { Button, message, Modal, PaginationProps } from "antd";
+import { Button, message, Modal } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
 import React, { useEffect, useRef, useState } from "react";
 import { findDOMNode } from "react-dom";
 import OperationModal from "./components/OperationModal";
-import { useAddProject, useBatchDeleteProject, useGetProjects, useUpdateProject } from "@/api";
+import { useCreate, useUpdate } from "@/api/request";
+import { useBatchDeleteProject, useGetProjects } from "@api";
 
-const TableList = () => {
+const TableList= () => {
   const { formatMessage } = useLocale();
 
   const addBtn = useRef(null);
@@ -25,18 +26,21 @@ const TableList = () => {
 
   const [showDetail, setShowDetail] = useState<boolean>(false);
 
-  const [pagination, setPagination] = useState<Partial<PaginationProps>>({
+  const [pagination, setPagination] = useState<{}>({
     current: 1,
     pageSize: 10,
-    total: 0,
   });
+
   const actionRef = useRef<ActionType>();
   const [selectedRowsState, setSelectedRows] = useState<API.Project[]>([]);
 
-  const { data, error, isLoading, refetch } = useGetProjects(pagination, filters);
+  const { data, error, isLoading, refetch } = useGetProjects(
+    pagination,
+    filters
+  );
 
-  const { mutateAsync } = useAddProject();
-  const { mutateAsync: update } = useUpdateProject();
+  const { mutateAsync } = useCreate<API.Project, API.Project>("/projects");
+  const { mutateAsync: update } = useUpdate<API.Project>("/projects");
   const { mutateAsync: batchDelete } = useBatchDeleteProject();
 
   useEffect(() => {
@@ -50,7 +54,7 @@ const TableList = () => {
 
   useEffect(() => {
     refetch();
-  }, [pagination.current, pagination.pageSize, filters]);
+  }, [filters]);
 
   const showModal = () => {
     setVisible(true);
@@ -123,7 +127,6 @@ const TableList = () => {
     if (!selectedRows) return true;
     try {
       await batchDelete(selectedRows.map((row) => row.id));
-      setPagination({ ...pagination, current: 1 });
       hide();
       message.success("删除成功，即将刷新");
       return true;
@@ -139,7 +142,13 @@ const TableList = () => {
       title: formatMessage({ id: "app.project.name" }),
       dataIndex: "name",
       tip: "项目名称是唯一的 key",
-      sorter: true,
+      search: {
+        transform: (value) => {
+          return {
+            filter: "name:eq:" + value,
+          };
+        },
+      },
       render: (dom, entity) => {
         return (
           <a
@@ -157,14 +166,13 @@ const TableList = () => {
       title: formatMessage({ id: "app.project.description" }),
       dataIndex: "description",
       valueType: "textarea",
-      sorter: true,
-    },
-    {
-      title: formatMessage({ id: "app.project.updateAt" }),
-      dataIndex: 'updatedAt',
-      sorter: true,
-      valueType: 'dateTime',
-      hideInForm: true,
+      search: {
+        transform: (value) => {
+          return {
+            filter: "description:eq:" + value,
+          };
+        },
+      },
     },
     {
       title: formatMessage({ id: "gloabal.tips.operation" }),
@@ -207,12 +215,12 @@ const TableList = () => {
     <PageContainer>
       <ProTable<API.Project>
         headerTitle={formatMessage({
-          id: 'app.project.title',
-          defaultMessage: '项目管理',
-        })}
+                id: 'app.project.title',
+                defaultMessage: '项目管理',
+              })}
         actionRef={actionRef}
         rowKey="id"
-        options={{ reload: false }}
+        options={{reload: false}}
         toolBarRender={() => [
           <Button type="primary" key="primary" onClick={showModal}>
             <PlusOutlined /> <LocaleFormatter id="gloabal.tips.create" />
@@ -221,10 +229,6 @@ const TableList = () => {
         request={undefined}
         dataSource={projects}
         columns={columns}
-        pagination={pagination}
-        onChange={(pagination, filters, sorter) => {
-          setPagination(pagination);
-        }}
         rowSelection={{
           onChange: (_, selectedRows) => {
             setSelectedRows(selectedRows);
@@ -269,11 +273,11 @@ const TableList = () => {
             onClick={async () => {
               await handleRemove(selectedRowsState);
               setSelectedRows([]);
-              refetch();
+                  refetch();
 
             }}
           >
-            <LocaleFormatter id="app.project.batchDeletion" />
+            <LocaleFormatter id="app.project.batchDeletion"  />
           </Button>
         </FooterToolbar>
       )}

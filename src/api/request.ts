@@ -1,6 +1,5 @@
 import { createContext, ReactNode } from 'react';
-import Axios, { AxiosInstance } from 'axios';
-import AxiosTransformer from 'axios'
+import Axios, { AxiosInstance, AxiosTransformer } from 'axios';
 import { Toast } from 'antd-mobile';
 import { useContext } from 'react';
 import { useQuery, useMutation, useQueryClient } from 'react-query'
