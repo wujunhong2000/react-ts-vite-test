@@ -21,7 +21,8 @@
         "node_modules/*"
       ],
       "@*": ["src/*"],
-    }
+    },
+    "suppressImplicitAnyIndexErrors": true
   },
   "include": ["src", "vite.config.ts", "cypress"]
 }

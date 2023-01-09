@@ -8,6 +8,7 @@ import { useRoutes, RouteObject } from "react-router-dom";
 
 const NotFound = lazy(() => import('@/pages/404'));
 const Project = lazy(() => import('@/pages/project'));
+const SignIn = lazy(() => import('@/pages/SignIn'));
 
 const routeList: RouteObject[] = [
 
@@ -22,6 +23,10 @@ const routeList: RouteObject[] = [
       {
         path: "/project/list",
         element: <WrapperRouteComponent><Project /></WrapperRouteComponent>,
+      },
+      {
+        path: "/SignIn",
+        element: <WrapperRouteComponent><SignIn /></WrapperRouteComponent>,
       },
       {
         path: "*",
