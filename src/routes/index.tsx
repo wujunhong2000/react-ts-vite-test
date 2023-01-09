@@ -1,14 +1,14 @@
 import React, { lazy, FC } from "react";
 
-import Dashboard from "@/pages/dashboard";
+// import Dashboard from "@/pages/dashboard";
 import LoginPage from "@/pages/login";
 import LayoutPage from "@/pages/layout";
 import SignIn from "@/pages/SignIn";
 import WrapperRouteComponent from "./config";
 import { useRoutes, RouteObject } from "react-router-dom";
 
-const NotFound = lazy(() => import('@/pages/404'));
-const Project = lazy(() => import('@/pages/project'));
+// const NotFound = lazy(() => import('@/pages/404'));
+// const Project = lazy(() => import('@/pages/project'));
 
 const routeList: RouteObject[] = [
 

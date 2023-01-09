@@ -5,7 +5,7 @@ import { viteMockServe } from "vite-plugin-mock";
 // import checker from "vite-plugin-checker";
 import viteCompression from "vite-plugin-compression";
 // import importToCDN from "vite-plugin-cdn-import";
-
+import svgr from 'vite-plugin-svgr'
 
 function pathResolve(dir) {
   return resolve(__dirname, '.', dir);
@@ -96,6 +96,7 @@ export default defineConfig(({ command }) => {
       assetsDir: "static",
     },
     plugins: [
+      svgr(),
       react(),
       // require('postcss-preset-env'),
       viteMockServe({

@@ -181,6 +181,7 @@ const useGetList = <T>(key: string, url: string, pagination?: any, filters?: any
 }
 
 const useGetOne = <T>(key: string, url: string, params?: any) => {
+    debugger
     const axios = useAxios();
 
     const service = async () => {
