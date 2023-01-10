@@ -6,7 +6,7 @@ import LayoutPage from "@/pages/layout";
 import WrapperRouteComponent from "./config";
 import { useRoutes, RouteObject } from "react-router-dom";
 
-const NotFound = lazy(() => import('@/pages/404'));
+const NotFound = lazy(() => import('@/pages/NotFound'));
 const Project = lazy(() => import('@/pages/project'));
 const SignIn = lazy(() => import('@/pages/SignIn'));
 

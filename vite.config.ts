@@ -119,17 +119,17 @@ export default ({ command } : { command: string}) => {
       outDir: "dist",
       assetsDir: "static",
     },
-    server: {
-      // 开发服务器配置
-      proxy: {
-        // 配置跨域
-        "/api": {
-          target: "http://127.0.0.1:7770",
-          changeOrigin: true,
-          rewrite: (path: any) => path.replace(/^\/api/, ""),
-        },
-      },
-    },
+    // server: {
+    //   // 开发服务器配置
+    //   proxy: {
+    //     // 配置跨域
+    //     "/api": {
+    //       target: "http://127.0.0.1:7770",
+    //       changeOrigin: true,
+    //       rewrite: (path: any) => path.replace(/^\/api/, ""),
+    //     },
+    //   },
+    // },
     plugins: [
       reactRefresh(),
       svgr(),

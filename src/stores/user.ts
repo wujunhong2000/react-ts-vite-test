@@ -6,6 +6,8 @@ import {
 import { LoginParams, Role } from '@/models/login';
 import { Locale, User } from '@/models/user';
 import { getGlobalState } from '@/models';
+console.log('store-newUser', JSON.parse(localStorage.getItem('newUser')!) ?? true);
+
 
 const initialState: User = {
     ...getGlobalState(),

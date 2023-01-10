@@ -20,15 +20,14 @@ const LoginForm: FC = () => {
     if (result) {
       localStorage.setItem("token", result.token);
       localStorage.setItem("username", result.username);
-
-      const from = location.state?.from || { pathname: "/dashboard" };
+      const from = location.state?.from || { pathname: "/SignIn" };
       navigate(from);
     }
   };
 
   return (
     <div className={styles.container}>
-      {/* <div className={styles.top}>
+      <div className={styles.top}>
         <div className={styles.header}>
           <Link to="/">
             <LogoSvg className={styles.logo} />
@@ -38,7 +37,7 @@ const LoginForm: FC = () => {
         <div className={styles.desc}>
           (React\Recoil\React Query\React Hooks\Vite)的移动端系统
         </div>
-      </div> */}
+      </div>
       <div className={styles.main}>
         <Form
           layout="horizontal"
