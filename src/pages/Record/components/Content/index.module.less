@@ -12,15 +12,22 @@
          font-weight: 500;
       }
       .chainBlock{
+         width: 100%;
          display: flex;
+         flex-direction: row;
+         justify-content: flex-start;
          .chainBlockLeft{
-            width: 200px;
-            background-color: rgba(47, 49, 148, 0.8);
+            width: 40px;
+            background-color: rgba(114, 116, 223, 0.8);
             .flexCenter();
          }
          .chainBlockRight{
-            flex: 1;
+            // flex: 1;
+            width: calc(100% - 40px);
             background-color: rgba(88, 89, 192, 0.8);
+            word-break: break-all; // 只对英文起作用，以字母作为换行依据。
+            word-wrap: break-word; // 只对英文起作用，以单词作为换行依据。
+            white-space: pre-wrap; // 只对中文起作用，强制换行。
          }
       }
       .personFont{
@@ -28,7 +35,7 @@
       }
    }
    .noRecord{
-      height: 100vh;
+      height: 20vh;
       .flexCenter();
    }
 }

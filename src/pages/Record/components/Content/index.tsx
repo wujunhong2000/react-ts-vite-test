@@ -14,8 +14,8 @@ const Content: FC<RecordContentProps> = (props) => {
   return (
     <div className={styles.content}>
       {resultData.length > 0 ? (
-        resultData.map((i) => (
-          <div className={styles.hasRecord}>
+        resultData.map((i, index) => (
+          <div className={styles.hasRecord} key={index}>
             <Button color="primary" fill="solid">
               {i.ranking}
             </Button>
@@ -31,8 +31,8 @@ const Content: FC<RecordContentProps> = (props) => {
             </div>
             <div>
               <Grid columns={3} gap={8}>
-                {(i.personsList || []).map((personIiem) => (
-                  <Grid.Item>
+                {(i.personsList || []).map((personIiem, personIndex) => (
+                  <Grid.Item key={personIndex}>
                     <div className={styles.personFont}>
                       {`${personIiem.jobNumber}${personIiem.name}`}
                     </div>

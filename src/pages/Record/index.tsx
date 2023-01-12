@@ -9,6 +9,7 @@ const Record = () => {
   const [personage, setPersonage] = useState<Array<Detail>>([]);
   const [annualMeeting, setAnnualMeeting] = useState<Array<Detail>>([]);
   const { data, error, isLoading, refetch } = useGetRecord();
+  console.log("🚀 ~ file: index.tsx:12 ~ Record ~ data", data)
   useEffect(() => {
     if (error) {
       Toast.show({
@@ -16,10 +17,9 @@ const Record = () => {
       });
       return;
     }
-    if (data && Array.isArray(data) && data.length > 0) {
-      const [personage, annualMeeting] = data;
-      setPersonage([...personage]);
-      setAnnualMeeting([...annualMeeting]);
+    if (data) {
+      setPersonage([...(data?.personage || [])]);
+      setAnnualMeeting([...(data?.annualMeeting || [])]);
     }
   }, [data, error]);
 
