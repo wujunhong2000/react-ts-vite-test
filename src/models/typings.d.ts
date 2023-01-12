@@ -984,4 +984,91 @@ declare namespace API {
     list?: Array<User>;
   }
 
+    /**
+  * 
+  * @export
+  * @interface Record
+  */
+    export interface Record {
+      /**
+       * 
+       * @type {number}
+       * @memberof Record
+       */
+      id: number;
+      /**
+       * 名字
+       * @type {string}
+       * @memberof Record
+       */
+      name: string;
+      /**
+       * 描述
+       * @type {string}
+       * @memberof Record
+       */
+      description?: string;
+      /**
+       * 创建人ID
+       * @type {number}
+       * @memberof Record
+       */
+      createBy?: number;
+      /**
+       * 修改人ID
+       * @type {number}
+       * @memberof Record
+       */
+      updateBy?: number;
+      /**
+       * 
+       * @type {string}
+       * @memberof Record
+       */
+      createdAt?: string;
+      /**
+       * 
+       * @type {string}
+       * @memberof Record
+       */
+      updatedAt?: string;
+      /**
+       * 
+       * @type {string}
+       * @memberof Record
+       */
+      deletedAt?: string;
+    }
+  export interface ProjectPagination {
+    /**
+     * json repose code
+     * @type {number}
+     * @memberof ProjectPagination
+     */
+    code?: number;
+    /**
+     * total numbers
+     * @type {number}
+     * @memberof ProjectPagination
+     */
+    total?: number;
+    /**
+     * offset
+     * @type {number}
+     * @memberof ProjectPagination
+     */
+    offset?: number;
+    /**
+     * limit
+     * @type {number}
+     * @memberof ProjectPagination
+     */
+    limit?: number;
+    /**
+     * 
+     * @type {Array<Project>}
+     * @memberof ProjectPagination
+     */
+    list?: Array<Project>;
+  }
 }

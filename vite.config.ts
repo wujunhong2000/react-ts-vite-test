@@ -57,8 +57,8 @@ export default ({ command } : { command: string}) => {
     optimizeDeps: {
       exclude: [], // 将指定数组中的依赖不进行依赖预构建
       include: [
-        '@ant-design/colors',
-        '@ant-design/icons',
+        // '@ant-design/colors',
+        // '@ant-design/icons',
       ],
     },
     // envPrefix: "ENV_", // 配置vite注入客户端环境变量校验的env前缀
@@ -96,6 +96,7 @@ export default ({ command } : { command: string}) => {
           modifyVars: {
             "@primary-color": "#1890ff",
           },
+          additionalData: '@import "./src/assets/style/index.less";',
         },
       },
       devSourcemap: true, // 开启css的Sourcemap（文件索引）

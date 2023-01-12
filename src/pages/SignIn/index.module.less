@@ -1,0 +1,79 @@
+.signIn{
+   position: relative;
+   height: calc(100vh - 20px - 100px);
+   :global{
+      // antd-mobile表单样式修改
+      .adm-input-element{
+         border: 1px solid rgba(255, 255, 255, 0.5);
+         border-radius: 5px;
+      }
+      .adm-form .adm-list.adm-list{
+         --border-inner: 0px;
+         --border-top: 0px;
+         --border-bottom: 0px;
+      }
+      .adm-form-item-label .adm-form-item-required-asterisk {
+         color: transparent;
+     }
+     .adm-list-item-content-prefix {
+         width: 14vw;
+         padding-right: 0px;
+      }
+      .adm-input-element {
+         padding: 4px;
+         color: rgba(255, 255, 255, 0.8);
+      }
+      .adm-form-item-label {
+         padding: 4px;
+      }
+      // 背景色透明
+      .adm-list-default .adm-list-body {
+         background-color: rgba(0, 0, 0, 0);
+     }
+     .adm-list-item {
+         background-color: rgba(0, 0, 0, 0);
+      }
+      .adm-auto-center-content {
+         color: rgba(255, 255, 255, 0.7);
+      }
+   }
+   .inputBlock{
+      margin-bottom: 30px;
+      .flexCenter();
+      :global{
+         .adm-space {
+            --gap: 10px;
+            --gap-vertical: 10px;
+        }
+        .adm-space.adm-space-block{
+            width: 100%;
+        }
+        .adm-space-item {
+            width: 100%;
+        }
+        .adm-input {
+         --placeholder-color: rgba(255, 255, 255, 0.5);
+        }
+        .adm-form-item-label{
+         color: rgba(255, 255, 255, 0.8);
+        }
+      }
+   }
+   .footBtn{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      bottom: 20px;
+      :global{
+         .adm-button.adm-button-shape-rounded {
+            width: 50vw;
+        }
+        .adm-button:not(.adm-button-default).adm-button-fill-none {
+            --text-color: rgba(255, 255, 255, 0.8);
+         }
+      }
+   }
+}

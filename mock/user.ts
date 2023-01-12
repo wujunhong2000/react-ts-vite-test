@@ -180,5 +180,16 @@ export default [
       return mockNoticeList;
     },
   },
+  {
+    url: '/api/v1/signIn',
+    method: 'POST',
+    response: ({ body }) => {
+      return {
+        flag: 'success',
+        number: 'number',
+        name: 'name',
+      };
+    },
+  },
 ] as MockMethod[];
 

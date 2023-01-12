@@ -1,6 +1,8 @@
 import { MenuList } from "@/models/menu.interface";
 import { LoginParams, LoginResult } from "@/models/login";
+import { SingnInParams, SingnInResult } from "@/models/signIn";
 import { CurrentUserResult } from "@/models/user";
+import { RecordResult } from "@/models/record";
 import { useBatch, useCreate, useGetList, useGetOne, useUpdate } from "./request";
 
 const projectResource = '/projects';
@@ -41,3 +43,14 @@ export const useUpdateProject = () => {
 export const useBatchDeleteProject = () => {
     return useBatch(projectResource + ':batchDelete');
 }
+
+export const useSignIn = () => {
+    return useCreate<SingnInParams, SingnInResult>("/signIn");
+}
+export const useGetRecord = () => {
+    return useGetOne<RecordResult>(
+        "Record",
+        "/record",
+    );
+}
+
